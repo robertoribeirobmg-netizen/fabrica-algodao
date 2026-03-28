@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estudo de Viabilidade — Planta de Extração de Óleo de Caroço de Algodão</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:    #0a0a0a;
+  --dark:     #111111;
+  --dark2:    #1a1a1a;
+  --dark3:    #222222;
+  --border:   #2e2e2e;
+  --border2:  #3a3a3a;
+  --green:    #1e7c1e;
+  --green-m:  #27a327;
+  --green-lt: rgba(30,124,30,.13);
+  --green-xlt:rgba(30,124,30,.06);
+  --yellow:   #cdd400;
+  --yellow-m: #d9e000;
+  --yellow-lt:rgba(205,212,0,.13);
+  --yellow-xlt:rgba(205,212,0,.06);
+  --white:    #ffffff;
+  --gray-100: #f0f0f0;
+  --gray-300: #888888;
+  --gray-400: #666666;
+  --gray-500: #444444;
+  --red:      #e53935;
+  --red-lt:   rgba(229,57,53,.12);
+  --r:        8px;
+  --sh: 0 2px 12px rgba(0,0,0,.4);
+  --sh-lg: 0 6px 28px rgba(0,0,0,.5);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--black);
+  color:var(--white);
+  font-size:14px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ══ HEADER ═════════════════════════════════ */
+.hd{
+  background:var(--dark);
+  border-bottom:3px solid var(--green);
+  position:relative;overflow:hidden;
+}
+.hd::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 90% 50%,rgba(30,124,30,.08) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 60% at 10% 20%,rgba(205,212,0,.05) 0%,transparent 60%);
+  pointer-events:none;
+}
+.hd-inner{
+  position:relative;max-width:1140px;margin:0 auto;
+  padding:3rem 2rem 2.5rem;
+  display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;
+}
+.hd-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--green-lt);border:1px solid rgba(30,124,30,.3);
+  color:var(--green-m);padding:.3rem .9rem;border-radius:20px;
+  font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:.9rem;
+}
+.hd-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green-m);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hd h1{
+  font-family:'Montserrat',sans-serif;font-weight:900;
+  font-size:clamp(1.6rem,3.2vw,2.8rem);line-height:1.1;color:var(--white);
+  letter-spacing:-.01em;
+}
+.hd h1 em{font-style:normal;color:var(--yellow)}
+.hd-sub{margin-top:.6rem;font-size:.88rem;color:var(--gray-300);font-weight:300}
+.kpi-row{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
+.kpi{
+  background:var(--dark2);border:1px solid var(--border);
+  border-radius:var(--r);padding:.7rem 1.1rem;min-width:118px;
+  border-bottom:2px solid var(--green);
+}
+.kpi b{
+  display:block;font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:1.25rem;color:var(--white);line-height:1;
+}
+.kpi b.y{color:var(--yellow)}
+.kpi b.g{color:var(--green-m)}
+.kpi small{font-size:.62rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:.07em}
+.hd-logo{
+  width:82px;height:82px;border-radius:50%;
+  background:var(--dark2);border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:2.6rem;
+}
+
+/* ══ NAV ═════════════════════════════════════ */
+.nv{
+  background:var(--dark);border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;box-shadow:var(--sh);
+}
+.nv-in{max-width:1140px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none}
+.nv-in::-webkit-scrollbar{display:none}
+.nb{
+  background:none;border:none;cursor:pointer;
+  font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;
+  color:var(--gray-400);padding:.85rem 1.05rem;
+  border-bottom:3px solid transparent;margin-bottom:-1px;
+  white-space:nowrap;transition:all .18s;
+}
+.nb:hover{color:var(--white);background:var(--dark2)}
+.nb.on{color:var(--yellow);border-bottom-color:var(--yellow);background:var(--yellow-xlt)}
+
+/* ══ SECTIONS ════════════════════════════════ */
+.s{display:none;max-width:1140px;margin:0 auto;padding:2.2rem 2rem 3rem}
+.s.on{display:block}
+
+/* ══ TYPOGRAPHY ══════════════════════════════ */
+h2{
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.3rem;
+  color:var(--white);margin-bottom:1.4rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+h2::before{content:'';width:4px;height:1.3em;background:var(--green-m);border-radius:2px;flex-shrink:0}
+h3{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:.76rem;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--gray-300);
+  margin:2rem 0 .75rem;padding-bottom:.4rem;
+  border-bottom:1px solid var(--border);
+}
+p{color:var(--gray-300);font-size:.87rem;margin-bottom:.6rem}
+strong{color:var(--white);font-weight:600}
+
+/* ══ GRIDS ═══════════════════════════════════ */
+.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.9rem;margin-bottom:1.2rem}
+.g3{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.9rem;margin-bottom:1.2rem}
+.g4{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.8rem;margin-bottom:1.2rem}
+
+/* ══ CARDS ═══════════════════════════════════ */
+.card{
+  background:var(--dark2);border:1px solid var(--border);border-radius:var(--r);
+  padding:1.1rem 1.3rem;border-top:3px solid var(--green);
+  transition:box-shadow .18s,transform .18s;
+}
+.card:hover{box-shadow:var(--sh);transform:translateY(-2px)}
+.card.y{border-top-color:var(--yellow)}
+.card.rd{border-top-color:var(--red)}
+.card.wh{border-top-color:rgba(255,255,255,.3)}
+.card h4{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:.74rem;
+  text-transform:uppercase;letter-spacing:.07em;color:var(--white);
+  margin-bottom:.45rem;
+}
+.card p{font-size:.83rem}
+
+/* ══ STAT CARDS ══════════════════════════════ */
+.sc{background:var(--dark2);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1.3rem}
+.sc-v{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.8rem;line-height:1;color:var(--yellow)}
+.sc-v.g{color:var(--green-m)}
+.sc-v.w{color:var(--white)}
+.sc-l{font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;color:var(--gray-400);margin-top:.15rem}
+.sc-s{font-size:.78rem;color:var(--gray-300);margin-top:.2rem}
+
+/* ══ TABLES ══════════════════════════════════ */
+.tw{overflow-x:auto;margin-bottom:1.3rem;border-radius:var(--r);border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;background:var(--dark2)}
+thead th{
+  background:var(--dark3);color:var(--gray-300);
+  font-family:'Montserrat',sans-serif;font-size:.67rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;padding:.7rem 1rem;text-align:left;
+  border-bottom:2px solid var(--green);
+}
+tbody tr{border-bottom:1px solid var(--border)}
+tbody tr:hover{background:var(--dark3)}
+tbody td{padding:.6rem 1rem;font-size:.84rem;color:var(--gray-300)}
+tbody td:first-child{color:var(--white);font-weight:500}
+tbody tr:last-child{border-bottom:none}
+
+/* ══ TAGS ════════════════════════════════════ */
+.tag{display:inline-block;padding:.16rem .55rem;font-size:.66rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:4px}
+.tg{background:var(--green-lt);color:var(--green-m);border:1px solid rgba(30,124,30,.25)}
+.ty{background:var(--yellow-lt);color:var(--yellow-m);border:1px solid rgba(205,212,0,.25)}
+.tr{background:var(--red-lt);color:var(--red);border:1px solid rgba(229,57,53,.2)}
+.tw2{background:rgba(255,255,255,.08);color:var(--white);border:1px solid rgba(255,255,255,.12)}
+
+/* ══ FINANCE PANEL ═══════════════════════════ */
+.fp{background:var(--dark2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:1.2rem}
+.fp-head{
+  background:var(--dark3);border-bottom:2px solid var(--green);
+  padding:.75rem 1.2rem;
+  font-family:'Montserrat',sans-serif;font-size:.74rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;color:var(--gray-300);
+  display:flex;align-items:center;gap:.5rem;
+}
+.fp-head::before{content:'';width:3px;height:1em;background:var(--green-m);border-radius:2px}
+.fr{display:flex;justify-content:space-between;align-items:center;padding:.55rem 1.2rem;border-bottom:1px solid var(--border);font-size:.87rem}
+.fr:last-child{border-bottom:none}
+.fr.total{background:var(--green-lt);border-top:1px solid rgba(30,124,30,.3)}
+.fr.total2{background:var(--yellow-lt);border-top:1px solid rgba(205,212,0,.3)}
+.fl{color:var(--gray-300)}
+.fv{font-family:'Montserrat',sans-serif;font-weight:700;color:var(--white)}
+.fv.pos{color:var(--green-m)}
+.fv.neg{color:var(--red)}
+.fv.big{font-size:1.1rem;color:var(--yellow)}
+.fv.gbig{font-size:1.1rem;color:var(--green-m)}
+
+/* ══ ALERTS ══════════════════════════════════ */
+.al{
+  display:flex;gap:.8rem;padding:.9rem 1.1rem;border-radius:var(--r);
+  margin-bottom:1rem;font-size:.86rem;
+  background:var(--green-xlt);border:1px solid rgba(30,124,30,.25);color:var(--green-m);
+}
+.al.y{background:var(--yellow-xlt);border-color:rgba(205,212,0,.25);color:var(--yellow-m)}
+.al.r{background:var(--red-lt);border-color:rgba(229,57,53,.2);color:var(--red)}
+.al.w{background:rgba(255,255,255,.05);border-color:var(--border);color:var(--gray-300)}
+.al-icon{flex-shrink:0;font-size:1rem;margin-top:.05rem}
+.al strong{color:inherit}
+
+/* ══ LOCATION CARDS ══════════════════════════ */
+.lc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-bottom:1.3rem}
+.lc{background:var(--dark2);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem;position:relative}
+.lc.win{border:2px solid var(--green-m);box-shadow:0 0 0 3px var(--green-lt),var(--sh)}
+.win-badge{
+  position:absolute;top:-1px;right:12px;
+  background:var(--green);color:var(--white);
+  font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.22rem .65rem;border-radius:0 0 6px 6px;
+}
+.lc-city{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.2rem;color:var(--white)}
+.lc-st{font-size:.72rem;font-weight:700;color:var(--green-m);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.8rem}
+.br{margin:.32rem 0}
+.bl{display:flex;justify-content:space-between;font-size:.67rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.18rem}
+.bt{height:5px;background:var(--dark3);border-radius:3px;overflow:hidden}
+.bf{height:100%;border-radius:3px;transition:width 1s ease}
+.bf-g{background:var(--green-m)}
+.bf-y{background:var(--yellow)}
+.bf-w{background:rgba(255,255,255,.4)}
+.lc-score{font-family:'Montserrat',sans-serif;font-weight:800;font-size:2.1rem;color:var(--yellow);margin-top:.8rem;line-height:1}
+.lc-score span{font-size:.85rem;color:var(--gray-400);font-weight:400}
+.lc-note{font-size:.78rem;color:var(--gray-400);margin-top:.5rem;line-height:1.5}
+
+/* ══ TEAM GRID ═══════════════════════════════ */
+.tg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:.85rem;margin-bottom:1.3rem}
+.tc{background:var(--dark2);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem;text-align:center}
+.tc-ic{font-size:1.7rem;margin-bottom:.35rem}
+.tc-nm{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--white)}
+.tc-ct{font-family:'Montserrat',sans-serif;font-weight:800;font-size:2rem;color:var(--yellow);line-height:1}
+.tc-rl{font-size:.75rem;color:var(--gray-400);margin-top:.3rem;line-height:1.4}
+.tc-sl{font-size:.76rem;font-weight:700;color:var(--green-m);margin-top:.4rem}
+
+/* ══ TIMELINE ════════════════════════════════ */
+.tl{position:relative;padding-left:2.2rem}
+.tl::before{content:'';position:absolute;left:.5rem;top:.4rem;bottom:.4rem;width:2px;background:linear-gradient(180deg,var(--green),var(--yellow))}
+.ti{position:relative;margin-bottom:1.4rem}
+.ti::before{
+  content:'';position:absolute;left:-1.87rem;top:.32rem;
+  width:11px;height:11px;border-radius:50%;
+  background:var(--black);border:3px solid var(--green-m);
+  box-shadow:0 0 0 3px var(--green-lt);
+}
+.ti-per{font-size:.68rem;font-weight:700;color:var(--green-m);text-transform:uppercase;letter-spacing:.1em;font-family:'Montserrat',sans-serif}
+.ti-ttl{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.93rem;color:var(--white);margin:.1rem 0 .28rem}
+.ti-body{font-size:.83rem;color:var(--gray-400);line-height:1.6}
+
+/* ══ HIGHLIGHT BOX ═══════════════════════════ */
+.hbox{
+  background:var(--dark2);border:1px solid var(--border);
+  border-left:4px solid var(--yellow);
+  border-radius:var(--r);padding:1.1rem 1.3rem;margin-bottom:1.2rem;
+}
+.hbox.g{border-left-color:var(--green-m)}
+
+/* ══ SECTION INTRO ═══════════════════════════ */
+.sintro{
+  background:var(--dark2);border:1px solid var(--border);
+  border-radius:var(--r);padding:1rem 1.3rem;margin-bottom:1.4rem;
+  border-left:4px solid var(--green-m);font-size:.87rem;color:var(--gray-300);
+}
+
+/* ══ FOOTER ══════════════════════════════════ */
+.footer{
+  background:var(--dark);border-top:1px solid var(--border);
+  text-align:center;padding:1.2rem;color:var(--gray-400);font-size:.75rem;
+  margin-top:1rem;
+}
+.footer strong{color:var(--white)}
+
+/* ══ RESPONSIVE ══════════════════════════════ */
+@media(max-width:640px){
+  .hd-inner{grid-template-columns:1fr;padding:2rem 1rem 1.5rem}
+  .hd-logo{display:none}
+  .s{padding:1.4rem 1rem 2rem}
+  h2{font-size:1.1rem}
+  .kpi b{font-size:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════════ -->
+<div class="hd">
+  <div class="hd-inner">
+    <div>
+      <div class="hd-badge">Estudo de Viabilidade Completo · Bahia 2025</div>
+      <h1>Planta de Extração de<br><em>Óleo de Caroço de Algodão</em></h1>
+      <p class="hd-sub">Análise de Mercado · Localização Estratégica · CAPEX · Comercial · Operacional · RH</p>
+      <div class="kpi-row">
+        <div class="kpi"><b class="y">R$ 2,18M</b><small>Faturamento / mês</small></div>
+        <div class="kpi"><b class="g">R$ 830K</b><small>Lucro bruto / mês</small></div>
+        <div class="kpi"><b>38%</b><small>Margem bruta</small></div>
+        <div class="kpi"><b class="y">~15m</b><small>Payback estimado</small></div>
+        <div class="kpi"><b>LEM · BA</b><small>Localização ideal</small></div>
+        <div class="kpi"><b class="g">22</b><small>Funcionários</small></div>
+      </div>
+    </div>
+    <div class="hd-logo">🌾</div>
+  </div>
+</div>
+
+<!-- ═══════════════ NAV ════════════════════ -->
+<div class="nv">
+  <div class="nv-in">
+    <button class="nb on"  onclick="show('produto',this)">🌱 Produto</button>
+    <button class="nb"     onclick="show('mercado',this)">📊 Mercado</button>
+    <button class="nb"     onclick="show('localizacao',this)">📍 Localização</button>
+    <button class="nb"     onclick="show('fornecedores',this)">🚛 Fornecedores</button>
+    <button class="nb"     onclick="show('comercial',this)">💼 Comercial</button>
+    <button class="nb"     onclick="show('financeiro',this)">💰 Financeiro</button>
+    <button class="nb"     onclick="show('rh',this)">👥 Equipe</button>
+    <button class="nb"     onclick="show('cronograma',this)">📅 Cronograma</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     PRODUTO
+════════════════════════════════════════════ -->
+<div id="produto" class="s on">
+  <h2>O Que Esta Fábrica Produz</h2>
+
+  <div class="g2">
+    <div class="card">
+      <h4>🌾 Matéria-Prima — Caroço de Algodão</h4>
+      <p>Subproduto do beneficiamento da pluma. A Bahia é o <strong>2º maior estado produtor do Brasil</strong>. O Oeste Baiano concentra 98% da produção estadual. Preço CIF praticado: <strong>R$ 1.350/t</strong>.</p>
+    </div>
+    <div class="card g">
+      <h4>🧺 Produto 1 — Torta / Farelo de Algodão</h4>
+      <p>Principal produto. <strong>900 kg por tonelada</strong> processada. Proteína bruta 28–38% PB. Alimentação de bovinos, ovinos e caprinos. Ticket: <strong>18 sacas × R$ 85 = R$ 1.530/t</strong>.</p>
+    </div>
+    <div class="card y">
+      <h4>🫙 Produto 2 — Óleo Bruto de Algodão</h4>
+      <p><strong>100 litros por tonelada</strong> processada. Refinarias (óleo comestível), indústria de sabão ou biodiesel. Ticket: <strong>100 L × R$ 6,50 = R$ 650/t</strong>.</p>
+    </div>
+    <div class="card wh">
+      <h4>⚙️ Equipamentos — Sichelero RS</h4>
+      <p>Planta modular 2.500–3.000 kg/h. 4 Prensas S750 (60 cv cada), moinho 30 cv, centrífuga decanter, painel WEG completo. <strong>R$ 1.200.000</strong>. Prazo 5 meses. Inclui montagem e treinamento.</p>
+    </div>
+  </div>
+
+  <h3>Fluxo do Processo Industrial</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>#</th><th>Etapa</th><th>Equipamento</th><th>Função</th><th>Potência</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Recepção / Abastecimento</td><td>Caracol Moega 200×1000 + rosca transportadora</td><td>Movimentação do caroço para a linha</td><td>5 cv</td></tr>
+        <tr><td>2</td><td>Distribuição às Prensas</td><td>Caracol Aberto 350×6000</td><td>Carga uniforme nas 4 prensas</td><td>3 cv</td></tr>
+        <tr><td>3</td><td>Prensagem Mecânica</td><td>4× Prensa modelo S750</td><td>Extração do óleo bruto por pressão</td><td>4 × 60 cv</td></tr>
+        <tr><td>4</td><td>Separação de Borra</td><td>4× Suporte com borreira + caracóis de retorno</td><td>Recuperação de óleo residual da torta</td><td>4 × ¼ cv</td></tr>
+        <tr><td>5</td><td>Descarga da Torta</td><td>Caracol Aberto 300×9500</td><td>Transporte da torta ao moinho</td><td>3 cv</td></tr>
+        <tr><td>6</td><td>Moagem do Farelo</td><td>Moinho à martelo 30 cv / 4 t/h</td><td>Moagem fina → farelo ensacável</td><td>30 cv</td></tr>
+        <tr><td>7</td><td>Clarificação do Óleo</td><td>Decanter metálico + Centrífuga Decanter horizontal</td><td>Separação fina de borra do óleo bruto</td><td>½ + 10 cv</td></tr>
+        <tr><td>8</td><td>Controle / Automação</td><td>Painel WEG completo</td><td>Partidas, inversores, proteções elétricas</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Rentabilidade por Tonelada Processada</h3>
+  <div class="fp">
+    <div class="fp-head">Resultado por Tonelada de Caroço — Base dos Dados Fornecidos</div>
+    <div class="fr"><span class="fl">Custo matéria-prima (1 t caroço CIF)</span><span class="fv neg">− R$ 1.350,00</span></div>
+    <div class="fr"><span class="fl">Torta: 18 sacas × R$ 85,00  (900 kg produzidos)</span><span class="fv pos">+ R$ 1.530,00</span></div>
+    <div class="fr"><span class="fl">Óleo bruto: 100 L × R$ 6,50</span><span class="fv pos">+ R$ 650,00</span></div>
+    <div class="fr total"><span class="fl" style="color:var(--white);font-weight:700">Lucro Bruto por Tonelada Processada</span><span class="fv big">R$ 830,00 / t</span></div>
+    <div class="fr"><span class="fl">Margem bruta sobre receita total</span><span class="fv pos">38%</span></div>
+    <div class="fr"><span class="fl">Faturamento mensal (1.000 t/mês)</span><span class="fv">R$ 2.180.000</span></div>
+  </div>
+
+  <div class="al">
+    <span class="al-icon">✅</span>
+    <div><strong>Margem bruta de 38% é excepcional para agroindústria.</strong> A cada R$ 1,00 em matéria-prima, a planta retorna R$ 1,61 em produtos. Um dos melhores índices do setor.</div>
+  </div>
+  <div class="al y">
+    <span class="al-icon">⚠️</span>
+    <div><strong>Atenção técnica — Gossipol:</strong> O caroço contém gossipol, composto que limita o uso em reprodutores machos e deve respeitar máx. 15–20% da dieta total para fêmeas. Não restringe o mercado — é dado técnico para rotulagem e orientação comercial.</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     MERCADO
+════════════════════════════════════════════ -->
+<div id="mercado" class="s">
+  <h2>Mercado Brasil</h2>
+
+  <div class="g4">
+    <div class="sc"><div class="sc-v">7,5 Mi t</div><div class="sc-l">Produção BR 2023</div><div class="sc-s">Recorde histórico</div></div>
+    <div class="sc"><div class="sc-v g">25%</div><div class="sc-l">Participação Bahia</div><div class="sc-s">2º maior produtor nacional</div></div>
+    <div class="sc"><div class="sc-v">98%</div><div class="sc-l">Oeste Baiano no BA</div><div class="sc-s">São Desidério, LEM, Barreiras</div></div>
+    <div class="sc"><div class="sc-v w">R$7,3Bi</div><div class="sc-l">Valor prod. BA 2023</div><div class="sc-s">+7% vs 2022</div></div>
+  </div>
+
+  <h3>Mapa de Produção — Onde Está a Matéria-Prima</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Estado / Município</th><th>Participação Nacional</th><th>Produção (caroço) / safra</th><th>Relevância para Sua Fábrica</th></tr></thead>
+      <tbody>
+        <tr><td>Mato Grosso (total)</td><td>~65%</td><td>~4,8 Mi t</td><td><span class="tag ty">Backup / Trading</span></td></tr>
+        <tr><td>Bahia — Oeste Baiano</td><td>~25%</td><td>~1,5–1,8 Mi t</td><td><span class="tag tg">Fornecedor Principal</span></td></tr>
+        <tr><td>⭐ São Desidério (BA)</td><td>Maior produtor BA</td><td>380.000+ t</td><td><span class="tag tg">Contrato Prioritário</span></td></tr>
+        <tr><td>⭐ Formosa do Rio Preto (BA)</td><td>2º no BA</td><td>155.000+ t</td><td><span class="tag tg">Contrato Prioritário</span></td></tr>
+        <tr><td>⭐ Correntina (BA)</td><td>3º no BA</td><td>132.000+ t</td><td><span class="tag tw2">Spot / Emergência</span></td></tr>
+        <tr><td>✅ Luís Eduardo Magalhães</td><td>Top 5 BA</td><td>80.000+ t</td><td><span class="tag tg">Sede Ideal</span></td></tr>
+        <tr><td>Goiás / MS / Maranhão</td><td>~10%</td><td>~750.000 t</td><td><span class="tag ty">Contingência</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Quem Compra — Torta / Farelo de Algodão</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Segmento / Região</th><th>Tipo de Demanda</th><th>Potencial de Mercado</th><th>Distância de LEM</th></tr></thead>
+      <tbody>
+        <tr><td>🐃 Confinamentos Oeste Baiano</td><td>Bovino de corte, granel</td><td><span class="tag tg">Alto — porta de casa</span></td><td>0–200 km</td></tr>
+        <tr><td>🐄 Agreste e Sertão (BA, PE, CE, SE, AL)</td><td>Caprino, ovino, bovino leite</td><td><span class="tag tg">Muito Alto — sem concorrente local</span></td><td>700–1.100 km</td></tr>
+        <tr><td>🏭 Fábricas de ração Nordeste</td><td>Ingrediente industrial a granel</td><td><span class="tag tw2">Médio — crescente</span></td><td>500–900 km</td></tr>
+        <tr><td>🐄 Minas Gerais (Triângulo / Oeste)</td><td>Confinamento e leiteiro</td><td><span class="tag tw2">Alto</span></td><td>1.100–1.500 km</td></tr>
+        <tr><td>🐂 Goiás e São Paulo</td><td>Confinamentos intensivos</td><td><span class="tag ty">Médio — concorre com MT</span></td><td>1.300–1.800 km</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Quem Compra — Óleo Bruto de Algodão</h3>
+  <div class="g3">
+    <div class="card g">
+      <h4>🏭 Refinarias (Melhor Preço)</h4>
+      <p>Bunge, Cargill, ADM. Processam para óleo comestível refinado. Pagam <strong>R$ 6–8/L</strong>. Exige laudo de acidez e cor. Melhor receita.</p>
+    </div>
+    <div class="card y">
+      <h4>⛽ Usinas de Biodiesel (PNPB)</h4>
+      <p>Nordeste tem usinas em BA, PI e RN. Programa garante demanda mínima. Boa opção para escoamento imediato.</p>
+    </div>
+    <div class="card wh">
+      <h4>🧼 Indústria de Sabão</h4>
+      <p>Menor valor agregado, mas compra contínua e sem exigência de qualidade refinada. Bom canal de backup operacional.</p>
+    </div>
+  </div>
+
+  <div class="al">
+    <span class="al-icon">💡</span>
+    <div><strong>Oportunidade estratégica clara:</strong> O Nordeste tem déficit histórico de farelo proteico para ruminantes. Farelo vindo do Centro-Oeste chega com frete de R$ 80–150/t extra. Uma planta local em LEM <strong>vence qualquer concorrência de preço</strong> no Agreste e Sertão desde o primeiro dia.</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     LOCALIZAÇÃO
+════════════════════════════════════════════ -->
+<div id="localizacao" class="s">
+  <h2>Análise de Localização</h2>
+
+  <div class="sintro">
+    <strong>Critério central da decisão:</strong> A matéria-prima representa <strong>62% do custo de produção</strong>. A localização da fábrica deve priorizar proximidade com os fornecedores acima de qualquer vantagem urbana. O ganho logístico na entrada supera em muito qualquer economia de saída.
+  </div>
+
+  <div class="lc-grid">
+    <div class="lc win">
+      <div class="win-badge">⭐ Recomendado</div>
+      <div class="lc-city">Luís Eduardo Magalhães</div>
+      <div class="lc-st">Oeste Baiano · BA</div>
+      <div class="br"><div class="bl"><span>Proximidade MP</span><span>95/100</span></div><div class="bt"><div class="bf bf-g" style="width:95%"></div></div></div>
+      <div class="br"><div class="bl"><span>Logística de Saída</span><span>82/100</span></div><div class="bt"><div class="bf bf-y" style="width:82%"></div></div></div>
+      <div class="br"><div class="bl"><span>Custo Terreno/Galpão</span><span>90/100</span></div><div class="bt"><div class="bf bf-g" style="width:90%"></div></div></div>
+      <div class="br"><div class="bl"><span>Mão de Obra</span><span>72/100</span></div><div class="bt"><div class="bf bf-w" style="width:72%"></div></div></div>
+      <div class="lc-score">85 <span>/ 100</span></div>
+      <p class="lc-note">São Desidério (maior produtor BA) a <strong>80 km</strong>. Formosa do RP a 120 km. Economia de R$ 100–130K/mês em frete de entrada. BR-020 conecta direto ao Nordeste.</p>
+    </div>
+    <div class="lc">
+      <div class="lc-city">Barreiras</div>
+      <div class="lc-st">Oeste Baiano · BA</div>
+      <div class="br"><div class="bl"><span>Proximidade MP</span><span>78/100</span></div><div class="bt"><div class="bf bf-g" style="width:78%"></div></div></div>
+      <div class="br"><div class="bl"><span>Logística de Saída</span><span>88/100</span></div><div class="bt"><div class="bf bf-y" style="width:88%"></div></div></div>
+      <div class="br"><div class="bl"><span>Custo Terreno/Galpão</span><span>80/100</span></div><div class="bt"><div class="bf bf-g" style="width:80%"></div></div></div>
+      <div class="br"><div class="bl"><span>Mão de Obra</span><span>85/100</span></div><div class="bt"><div class="bf bf-w" style="width:85%"></div></div></div>
+      <div class="lc-score">82 <span>/ 100</span></div>
+      <p class="lc-note">Aeroporto, cidade maior, melhor infraestrutura urbana. Alternativa sólida. Ideal se houver terreno ou parceiros locais disponíveis.</p>
+    </div>
+    <div class="lc">
+      <div class="lc-city">Feira de Santana</div>
+      <div class="lc-st">Centro-Norte · BA</div>
+      <div class="br"><div class="bl"><span>Proximidade MP</span><span>28/100</span></div><div class="bt"><div class="bf" style="width:28%;background:var(--red)"></div></div></div>
+      <div class="br"><div class="bl"><span>Logística de Saída</span><span>95/100</span></div><div class="bt"><div class="bf bf-y" style="width:95%"></div></div></div>
+      <div class="br"><div class="bl"><span>Custo Terreno/Galpão</span><span>55/100</span></div><div class="bt"><div class="bf bf-g" style="width:55%"></div></div></div>
+      <div class="br"><div class="bl"><span>Mão de Obra</span><span>92/100</span></div><div class="bt"><div class="bf bf-w" style="width:92%"></div></div></div>
+      <div class="lc-score" style="color:var(--gray-300)">67 <span>/ 100</span></div>
+      <p class="lc-note"><strong>Problema crítico:</strong> Frete MP R$ 120–150/t (650 km de LEM) = perda de R$ 120–150K/mês. Excelente para escritório comercial, não para produção.</p>
+    </div>
+    <div class="lc">
+      <div class="lc-city">Salvador / RMS</div>
+      <div class="lc-st">Região Metropolitana · BA</div>
+      <div class="br"><div class="bl"><span>Proximidade MP</span><span>12/100</span></div><div class="bt"><div class="bf" style="width:12%;background:var(--red)"></div></div></div>
+      <div class="br"><div class="bl"><span>Logística de Saída</span><span>96/100</span></div><div class="bt"><div class="bf bf-y" style="width:96%"></div></div></div>
+      <div class="br"><div class="bl"><span>Custo Terreno/Galpão</span><span>25/100</span></div><div class="bt"><div class="bf" style="width:25%;background:var(--red)"></div></div></div>
+      <div class="br"><div class="bl"><span>Mão de Obra</span><span>95/100</span></div><div class="bt"><div class="bf bf-w" style="width:95%"></div></div></div>
+      <div class="lc-score" style="color:var(--red)">57 <span>/ 100</span></div>
+      <p class="lc-note"><strong>Inviável para produção.</strong> Frete MP: R$ 150–200/t (850+ km). Área industrial 3–5× mais cara. Só para HQ/gestão.</p>
+    </div>
+  </div>
+
+  <h3>Impacto Financeiro da Localização Correta</h3>
+  <div class="fp">
+    <div class="fp-head">Comparativo de Custo Logístico de Entrada — 1.000 t/mês</div>
+    <div class="fr"><span class="fl">Frete MP: fábrica em LEM (compra local / FOB)</span><span class="fv pos">R$ 0 – 20/t</span></div>
+    <div class="fr"><span class="fl">Frete MP: fábrica em Feira de Santana (650 km)</span><span class="fv neg">R$ 120 – 150/t</span></div>
+    <div class="fr"><span class="fl">Frete MP: fábrica em Salvador (850 km)</span><span class="fv neg">R$ 150 – 200/t</span></div>
+    <div class="fr total"><span class="fl" style="color:var(--white);font-weight:700">Economia anual escolhendo LEM vs Feira</span><span class="fv big">R$ 1,2 – 1,5M / ano</span></div>
+  </div>
+
+  <div class="al">
+    <span class="al-icon">✅</span>
+    <div><strong>Decisão final recomendada: Planta produtiva em LEM + escritório comercial em Feira de Santana.</strong> Essa estrutura dual maximiza economia na MP (maior componente de custo) e mantém presença de vendas no maior hub logístico do Nordeste.</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     FORNECEDORES
+════════════════════════════════════════════ -->
+<div id="fornecedores" class="s">
+  <h2>Fornecedores e Estratégia de Compra</h2>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Fornecedor / Origem</th><th>Volume estimado</th><th>Distância de LEM</th><th>Estratégia</th></tr></thead>
+      <tbody>
+        <tr><td>⭐ Fazendas de São Desidério (BA)</td><td>300.000+ t/safra</td><td>80–120 km</td><td><span class="tag tg">Contrato Anual Prioritário</span></td></tr>
+        <tr><td>⭐ Formosa do Rio Preto (BA)</td><td>120.000+ t/safra</td><td>120–180 km</td><td><span class="tag tg">Contrato Anual</span></td></tr>
+        <tr><td>Algodoeiras / Desmotadoras Barreiras</td><td>60.000+ t/safra</td><td>100 km</td><td><span class="tag tg">Parceria Estratégica</span></td></tr>
+        <tr><td>Fazendas Correntina (BA)</td><td>100.000+ t/safra</td><td>150–200 km</td><td><span class="tag tw2">Spot / Emergência</span></td></tr>
+        <tr><td>ABAPA (Associação Baiana Prod. Algodão)</td><td>Institucional</td><td>LEM / Barreiras</td><td><span class="tag ty">Relacionamento Chave</span></td></tr>
+        <tr><td>Tradings / Corretores Mato Grosso</td><td>Ilimitado</td><td>1.500+ km</td><td><span class="tag tw2">Backup Sazonal</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>5 Estratégias para Comprar Mais Barato</h3>
+  <div class="g2">
+    <div class="card g">
+      <h4>📅 1 — Contrato Pré-Safra</h4>
+      <p>Fechar fornecimento <strong>antes da safra</strong> (set–nov) com fazendas de São Desidério. Garante preço fixo R$ 1.200–1.300/t vs spot R$ 1.350+. Desconto médio: <strong>R$ 50–150/t = R$ 50–150K/mês</strong>.</p>
+    </div>
+    <div class="card g">
+      <h4>📦 2 — Estoque no Pico de Colheita</h4>
+      <p>Mai–Set: maior oferta de caroço, preços 10–20% mais baixos. Estratégia: <strong>estocar 45–60 dias de MP na safra</strong> para usar na entressafra (out–abr) sem pagar preço premium.</p>
+    </div>
+    <div class="card y">
+      <h4>🤝 3 — Exclusividade com Algodoeiras</h4>
+      <p>Desmotadoras produzem caroço como subproduto e querem escoar. Negociar <strong>contrato de exclusividade de caroço</strong> com 2–3 unidades. Win-win: elas se livram do subproduto, você ganha preço.</p>
+    </div>
+    <div class="card y">
+      <h4>⚖️ 4 — Comprar por Paridade</h4>
+      <p>Fórmula EMBRAPA: preço-oportunidade = (0,915 × milho) + (0,381 × farelo soja). Quando o caroço estiver <strong>abaixo da paridade</strong>, compre máximo. Acima, reduza estoques.</p>
+    </div>
+    <div class="card rd">
+      <h4>⚠️ 5 — Risco de Entressafra</h4>
+      <p>Out–Abr: oferta reduz, preço sobe 15–25%. <strong>Silos de 1.000 t</strong> são investimento essencial. Comprar forte na safra é o que diferencia quem ganha de quem quebra nesse setor.</p>
+    </div>
+    <div class="card wh">
+      <h4>📊 6 — 3+ Fornecedores Ativos</h4>
+      <p>Nunca depender de um único produtor. Mínimo 3 fixos + 1 trading de backup. Solicitar análise mensal de qualidade: umidade, aflatoxinas e gossipol livre.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     COMERCIAL
+════════════════════════════════════════════ -->
+<div id="comercial" class="s">
+  <h2>Estratégia Comercial</h2>
+
+  <h3>Segmentação de Clientes — Torta / Farelo</h3>
+  <div class="g2">
+    <div class="card g">
+      <h4>🥇 Prioridade 1 — Fazendas Leiteiras Nordeste</h4>
+      <p>BA (Recôncavo, Sertão), PE, SE, AL, CE. Demanda contínua 12 meses. Vacas em lactação consomem 3–4 kg/dia de concentrado. Compram por contrato trimestral/semestral. <strong>Meta: 30% do volume.</strong></p>
+    </div>
+    <div class="card g">
+      <h4>🥈 Prioridade 2 — Confinamentos de Corte</h4>
+      <p>Confinamentos 5.000+ cabeças no Oeste Baiano, Sul BA e Oeste MG. Compram granel (por tonelada), altos volumes, ticket médio elevado. <strong>Meta: 40% do volume.</strong></p>
+    </div>
+    <div class="card y">
+      <h4>🥉 Prioridade 3 — Fábricas de Ração NE</h4>
+      <p>Usam farelo como ingrediente. Exigem laudo bromatológico e NF correta. Contratos mensais fixos. <strong>Meta: 20% do volume.</strong></p>
+    </div>
+    <div class="card wh">
+      <h4>4 — Caprinos/Ovinos Sertão</h4>
+      <p>Criadores em BA, CE, PE, RN. Segmento em crescimento com valorização da carne caprina. Torta é alternativa 60% mais barata que farelo de soja. <strong>Meta: 10% do volume.</strong></p>
+    </div>
+  </div>
+
+  <h3>Canais de Distribuição</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Canal</th><th>Forma de Venda</th><th>Frete</th><th>Margem / Vantagem</th></tr></thead>
+      <tbody>
+        <tr><td>Venda Direta CIF — Fazendas</td><td>Caminhão entregue na propriedade</td><td>Por conta da fábrica</td><td>Maior fidelização e volume garantido</td></tr>
+        <tr><td>Venda FOB — Fábrica LEM</td><td>Cliente retira em LEM</td><td>Por conta do cliente</td><td>Menor custo operacional, melhor caixa</td></tr>
+        <tr><td>Representantes Comerciais</td><td>PJ comissionados 3–5% s/ venda</td><td>Negociado</td><td>Cobertura regional sem custo fixo</td></tr>
+        <tr><td>Distribuidores Regionais</td><td>Atacadistas de insumos agro</td><td>Distribuidor</td><td>Menor margem, maior alcance geográfico</td></tr>
+        <tr><td>Plataformas Agro (MF Rural, AgroB2B)</td><td>Anúncios e cotações online</td><td>Negociado</td><td>Leads qualificados sem custo comercial</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Precificação — Torta de Algodão</h3>
+  <div class="fp">
+    <div class="fp-head">Referências de Preço de Mercado 2024–2025</div>
+    <div class="fr"><span class="fl">Preço atual de mercado (saco 50 kg, 28–38% PB)</span><span class="fv">R$ 75 – 100 / saca</span></div>
+    <div class="fr"><span class="fl">Base adotada na análise financeira</span><span class="fv">R$ 85 / saca</span></div>
+    <div class="fr"><span class="fl">Venda a granel — confinamentos grandes</span><span class="fv">R$ 1.400 – 1.600 / t</span></div>
+    <div class="fr"><span class="fl">Venda ensacada — fazendas menores e varejo</span><span class="fv">R$ 1.700 – 2.000 / t</span></div>
+    <div class="fr total"><span class="fl" style="color:var(--white);font-weight:700">Mix ideal: 60% granel + 40% sacaria</span><span class="fv big">≈ R$ 1.650 / t médio</span></div>
+  </div>
+
+  <div class="al">
+    <span class="al-icon">💡</span>
+    <div><strong>Alavancagem de receita:</strong> Melhorar o processo para produzir <strong>Farelo 38% PB</strong> (em vez de torta simples) permite cobrar R$ 95–110/saca vs R$ 85, adicionando R$ 180–460K/mês ao faturamento <strong>sem aumentar matéria-prima</strong>.</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     FINANCEIRO
+════════════════════════════════════════════ -->
+<div id="financeiro" class="s">
+  <h2>Estudo Financeiro Completo</h2>
+
+  <h3>CAPEX Total — Investimento Inicial</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Item</th><th>Especificação</th><th>Valor Estimado</th></tr></thead>
+      <tbody>
+        <tr><td>Equipamentos industriais Sichelero</td><td>Planta completa 2.500–3.000 kg/h algodão</td><td><strong>R$ 1.200.000</strong></td></tr>
+        <tr><td>Galpão industrial</td><td>~35×50 m = 1.750 m² (conf. renders)</td><td><strong>R$ 1.050.000</strong></td></tr>
+        <tr><td>Silos armazenagem MP</td><td>2 silos metálicos 500 t cada = 1.000 t total</td><td><strong>R$ 380.000</strong></td></tr>
+        <tr><td>Infraestrutura elétrica</td><td>Cabine primária, cabeamentos, aterramento ≥400 kVA</td><td><strong>R$ 280.000</strong></td></tr>
+        <tr><td>Obras civis e terraplanagem</td><td>Fundações, piso industrial, fossas, drenagem</td><td><strong>R$ 200.000</strong></td></tr>
+        <tr><td>Equipamentos de apoio</td><td>2 transpaleteiras, balança, tanque óleo 50.000 L</td><td><strong>R$ 120.000</strong></td></tr>
+        <tr><td>Terreno industrial</td><td>5.000 m² em distrito industrial LEM</td><td><strong>R$ 250.000</strong></td></tr>
+        <tr><td>Licenças e regularização</td><td>INEMA/BA, ANVISA, Vigilância Sanitária</td><td><strong>R$ 80.000</strong></td></tr>
+        <tr><td>Frete, montagem e instalação</td><td>RS→BA + equipe técnica Sichelero</td><td><strong>R$ 150.000</strong></td></tr>
+        <tr><td>Capital de giro — estoque MP</td><td>1.000 t × R$ 1.350 (1 mês de operação)</td><td><strong>R$ 1.350.000</strong></td></tr>
+        <tr><td>Reserva operacional</td><td>3 meses de custo fixo para ramp-up</td><td><strong>R$ 450.000</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="fp">
+    <div class="fp-head">Resumo do Investimento Total</div>
+    <div class="fr"><span class="fl">Apenas imobilizado (sem capital de giro)</span><span class="fv">R$ 3.710.000</span></div>
+    <div class="fr"><span class="fl">CAPEX total com capital de giro e reserva</span><span class="fv">R$ 5.510.000</span></div>
+    <div class="fr total"><span class="fl" style="color:var(--white);font-weight:700">Faixa realista com contingências (+15%)</span><span class="fv big">R$ 5,5 – 6,3 Mi</span></div>
+  </div>
+
+  <h3>DRE Mensal Estimado — Base 1.000 t/mês</h3>
+  <div class="fp">
+    <div class="fp-head">Demonstrativo de Resultado Mensal</div>
+    <div class="fr"><span class="fl">+ Torta: 18.000 sacas × R$ 85</span><span class="fv pos">R$ 1.530.000</span></div>
+    <div class="fr"><span class="fl">+ Óleo bruto: 100.000 L × R$ 6,50</span><span class="fv pos">R$ 650.000</span></div>
+    <div class="fr total"><span class="fl" style="color:var(--white);font-weight:700">= FATURAMENTO BRUTO</span><span class="fv big">R$ 2.180.000</span></div>
+    <div class="fr"><span class="fl">− Matéria-prima: 1.000 t × R$ 1.350</span><span class="fv neg">− R$ 1.350.000</span></div>
+    <div class="fr" style="background:var(--green-xlt)"><span class="fl" style="color:var(--white);">= LUCRO BRUTO (margem 38%)</span><span class="fv gbig">R$ 830.000</span></div>
+    <div class="fr"><span class="fl">− Folha de pagamento (22 pessoas + encargos)</span><span class="fv neg">− R$ 148.000</span></div>
+    <div class="fr"><span class="fl">− Energia elétrica industrial</span><span class="fv neg">− R$ 90.000</span></div>
+    <div class="fr"><span class="fl">− Fretes de distribuição (CIF clientes)</span><span class="fv neg">− R$ 80.000</span></div>
+    <div class="fr"><span class="fl">− Manutenção preventiva e corretiva</span><span class="fv neg">− R$ 30.000</span></div>
+    <div class="fr"><span class="fl">− Embalagens (sacaria, big-bags)</span><span class="fv neg">− R$ 35.000</span></div>
+    <div class="fr"><span class="fl">− Administrativo / TI / contabilidade</span><span class="fv neg">− R$ 25.000</span></div>
+    <div class="fr"><span class="fl">− Seguros, IPTU, taxas diversas</span><span class="fv neg">− R$ 12.000</span></div>
+    <div class="fr total2"><span class="fl" style="color:var(--white);font-weight:700">= EBITDA MENSAL ESTIMADO</span><span class="fv big">R$ 410.000 / mês</span></div>
+    <div class="fr"><span class="fl">EBITDA anual (12 meses plena operação)</span><span class="fv gbig">R$ 4.920.000</span></div>
+    <div class="fr"><span class="fl">Payback simples (CAPEX ÷ EBITDA anual)</span><span class="fv">≈ 13,5 meses</span></div>
+  </div>
+
+  <h3>Projeção 3 Anos</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Ano</th><th>Volume / mês</th><th>Faturamento Anual</th><th>EBITDA Anual</th><th>Marco</th></tr></thead>
+      <tbody>
+        <tr><td>Ano 1</td><td>600–800 t (ramp-up)</td><td>R$ 15,7 – 20,9 Mi</td><td>R$ 2,2 – 3,3 Mi</td><td>Ajuste de processo, conquista da carteira</td></tr>
+        <tr><td>Ano 2</td><td>1.000 t (plena cap.)</td><td>R$ 26,2 Mi</td><td>R$ 4,9 Mi</td><td>Payback atingido, custos otimizados</td></tr>
+        <tr><td>Ano 3</td><td>1.200+ t (2º turno)</td><td>R$ 31,4+ Mi</td><td>R$ 6,2+ Mi</td><td>Expansão de linha ou 2ª planta</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="g3">
+    <div class="card g"><h4>📊 TIR Estimada</h4><p><strong>45–55% a.a.</strong> (cenário conservador). Altamente atrativa — setor agroindustrial considera excelente a partir de 20% a.a.</p></div>
+    <div class="card y"><h4>⏱️ Payback</h4><p><strong>13–18 meses</strong> no ramp-up conservador. Em plena operação, retorno em ~13 meses. Excepcional para indústria.</p></div>
+    <div class="card rd"><h4>⚠️ Risco Principal</h4><p>Variação do caroço: +R$ 100/t = −R$ 100K/mês de EBITDA. Gestão de contratos e estoque sazonal é o fator crítico.</p></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     EQUIPE
+════════════════════════════════════════════ -->
+<div id="rh" class="s">
+  <h2>Estrutura de Equipe</h2>
+
+  <div class="tg-grid">
+    <div class="tc"><div class="tc-ic">🏭</div><div class="tc-nm">Gerente Industrial</div><div class="tc-ct">1</div><div class="tc-rl">Eng. mecânico ou agroindustrial. Responsável pela operação total, metas e segurança.</div><div class="tc-sl">R$ 8.000 – 12.000</div></div>
+    <div class="tc"><div class="tc-ic">⚙️</div><div class="tc-nm">Operadores de Prensa</div><div class="tc-ct">4</div><div class="tc-rl">2 por turno (2 turnos de 8h). Operam as 4 prensas S750, caracóis e moinho. Treinamento pela Sichelero.</div><div class="tc-sl">R$ 2.500 – 3.200 cada</div></div>
+    <div class="tc"><div class="tc-ic">🔧</div><div class="tc-nm">Mecânico / Eletricista</div><div class="tc-ct">2</div><div class="tc-rl">Manutenção preventiva e corretiva. Reduz downtime e custo de AT externa.</div><div class="tc-sl">R$ 3.500 – 4.500 cada</div></div>
+    <div class="tc"><div class="tc-ic">🧪</div><div class="tc-nm">Técnico de Qualidade</div><div class="tc-ct">1</div><div class="tc-rl">Controla umidade, PB%, gossipol livre e aflatoxinas. Emite laudos bromatológicos.</div><div class="tc-sl">R$ 3.000 – 4.000</div></div>
+    <div class="tc"><div class="tc-ic">📦</div><div class="tc-nm">Logística / Expedição</div><div class="tc-ct">3</div><div class="tc-rl">Recepção de MP, expedição, movimentação interna, inventário físico.</div><div class="tc-sl">R$ 2.200 – 2.800 cada</div></div>
+    <div class="tc"><div class="tc-ic">🚛</div><div class="tc-nm">Motorista</div><div class="tc-ct">1</div><div class="tc-rl">Entregas locais e transporte de MP entre fazendas próximas. Rotas longas terceirizadas.</div><div class="tc-sl">R$ 3.200 – 4.000</div></div>
+    <div class="tc"><div class="tc-ic">💼</div><div class="tc-nm">Gerente Comercial</div><div class="tc-ct">1</div><div class="tc-rl">Carteira de clientes, contratos, precificação e metas. Experiência em insumos agro.</div><div class="tc-sl">R$ 7.000 – 10.000 + comissão</div></div>
+    <div class="tc"><div class="tc-ic">📞</div><div class="tc-nm">Representantes PJ</div><div class="tc-ct">3</div><div class="tc-rl">1 Oeste BA · 1 Nordeste (PE/CE/SE/AL) · 1 MG/GO. Comissionados 3–5%.</div><div class="tc-sl">R$ 4–8K/mês típico</div></div>
+    <div class="tc"><div class="tc-ic">💰</div><div class="tc-nm">Adm / Financeiro</div><div class="tc-ct">2</div><div class="tc-rl">1 auxiliar adm (NF, RH, contas) + 1 analista financeiro. BPO contábil externo.</div><div class="tc-sl">R$ 2.500 – 4.000 cada</div></div>
+    <div class="tc"><div class="tc-ic">🏗️</div><div class="tc-nm">Auxiliares de Prod.</div><div class="tc-ct">4</div><div class="tc-rl">Apoio geral: sacaria, limpeza de equipamentos, abastecimento de moega.</div><div class="tc-sl">R$ 1.800 – 2.200 cada</div></div>
+  </div>
+
+  <h3>Resumo da Folha de Pagamento</h3>
+  <div class="fp">
+    <div class="fp-head">Custo Total Mensal com Pessoal — 22 Pessoas</div>
+    <div class="fr"><span class="fl">Gerências (2 pessoas)</span><span class="fv">R$ 18.000</span></div>
+    <div class="fr"><span class="fl">Operadores e técnicos industriais (10 pessoas)</span><span class="fv">R$ 32.000</span></div>
+    <div class="fr"><span class="fl">Comercial (1 gerente + 3 reps PJ comissão)</span><span class="fv">R$ 28.000</span></div>
+    <div class="fr"><span class="fl">Administrativo e financeiro (2 pessoas)</span><span class="fv">R$ 7.000</span></div>
+    <div class="fr"><span class="fl">Auxiliares de produção (4 pessoas)</span><span class="fv">R$ 8.000</span></div>
+    <div class="fr"><span class="fl">Encargos sociais estimados (~40% s/ CLT)</span><span class="fv neg">R$ 25.000</span></div>
+    <div class="fr"><span class="fl">Benefícios (VT, VR, plano de saúde)</span><span class="fv neg">R$ 15.000</span></div>
+    <div class="fr total"><span class="fl" style="color:var(--white);font-weight:700">TOTAL FOLHA MENSAL</span><span class="fv big">R$ 133.000 / mês</span></div>
+    <div class="fr"><span class="fl">Custo por tonelada processada</span><span class="fv">R$ 133 / t</span></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     CRONOGRAMA
+════════════════════════════════════════════ -->
+<div id="cronograma" class="s">
+  <h2>Cronograma de Implantação</h2>
+
+  <div class="tl">
+    <div class="ti">
+      <div class="ti-per">Mês 1 – 2</div>
+      <div class="ti-ttl">Estruturação Legal e Aquisições</div>
+      <div class="ti-body">Constituição da empresa (CNPJ, alvará), aquisição do terreno em LEM, entrada de pagamento dos equipamentos Sichelero, início das licenças ambientais no INEMA/BA. Levantamento dos primeiros contratos de fornecimento de MP com fazendas de São Desidério.</div>
+    </div>
+    <div class="ti">
+      <div class="ti-per">Mês 2 – 4</div>
+      <div class="ti-ttl">Obras Civis e Infraestrutura Elétrica</div>
+      <div class="ti-body">Terraplanagem, construção do galpão metálico (35×50 m), fundações para silos, instalação da cabine elétrica (≥400 kVA), sistema de drenagem e piso industrial. Contratação do gerente industrial, eletricista e técnico de qualidade.</div>
+    </div>
+    <div class="ti">
+      <div class="ti-per">Mês 4 – 5</div>
+      <div class="ti-ttl">Chegada e Montagem dos Equipamentos</div>
+      <div class="ti-body">Entrega da Planta Sichelero (5 meses de prazo). Montagem pela equipe do fabricante. Cabeamento industrial, instalação dos painéis WEG, montagem dos silos e tanque de óleo. Treinamento da equipe operacional incluso no contrato.</div>
+    </div>
+    <div class="ti">
+      <div class="ti-per">Mês 5 – 6</div>
+      <div class="ti-ttl">Start-Up e Primeiras Produções</div>
+      <div class="ti-body">Start da linha com assistência técnica Sichelero in loco. Ajustes operacionais (pressão das prensas, rotação, temperatura). Primeiras produções de 200–400 t para calibração. Envio de amostras a clientes-alvo para aprovação. Emissão das primeiras notas fiscais.</div>
+    </div>
+    <div class="ti">
+      <div class="ti-per">Mês 6 – 12</div>
+      <div class="ti-ttl">Operação Comercial — Ramp-Up</div>
+      <div class="ti-body">Escalar para 600–800 t/mês. Conquistar os primeiros 10 contratos (fazendas leiteiras + 2 confinamentos + 1 fábrica de ração). Estruturar representantes comerciais. Meta: 100% do volume escoado mensalmente sem acúmulo de estoque de produto acabado.</div>
+    </div>
+    <div class="ti">
+      <div class="ti-per">Mês 12 – 18</div>
+      <div class="ti-ttl">Plena Capacidade + Início do Payback</div>
+      <div class="ti-body">Atingir 1.000 t/mês processadas. EBITDA mensal acima de R$ 400K. Início do retorno do CAPEX. Avaliação de expansão: adicionar 1 prensa S750 (R$ 250–300K) para atingir 1.200+ t/mês com terceiro turno.</div>
+    </div>
+  </div>
+
+  <h3>Fatores Críticos de Sucesso</h3>
+  <div class="g2">
+    <div class="card g"><h4>1 — Garantir MP com Preço Bom Antes de Montar</h4><p>Fechar contratos de fornecimento antes da obra. A margem depende do preço do caroço. Cada R$ 100/t de variação = ±R$ 100K/mês de EBITDA.</p></div>
+    <div class="card g"><h4>2 — Vender Antes de Produzir</h4><p>Antes do start-up, ter pelo menos 60% do volume mensal comprometido em contratos ou cartas de intenção. Evita capital de giro preso em produto acabado.</p></div>
+    <div class="card y"><h4>3 — Qualidade com Laudo Bromatológico</h4><p>Laudo mensal (PB%, EE, Gossipol Livre, Aflatoxinas). Clientes maiores exigem isso. Laboratório próprio ou parceria com UFBA / EMBRAPA / FIOCRUZ.</p></div>
+    <div class="card y"><h4>4 — Gestão de Estoque Sazonal</h4><p>Comprar forte na safra (mai–set), estocar 45–60 dias de MP. Evitar comprar na entressafra a preço premium. Isso é o que separa quem lucra de quem quebra.</p></div>
+  </div>
+
+  <h3>Resumo Executivo Final</h3>
+  <div class="fp">
+    <div class="fp-head">Síntese Completa do Projeto</div>
+    <div class="fr"><span class="fl">Produto principal</span><span class="fv">Torta/Farelo de algodão + Óleo bruto</span></div>
+    <div class="fr"><span class="fl">Localização ideal da planta</span><span class="fv">Luís Eduardo Magalhães (BA)</span></div>
+    <div class="fr"><span class="fl">Fornecedores principais</span><span class="fv">São Desidério + Formosa do Rio Preto (BA)</span></div>
+    <div class="fr"><span class="fl">CAPEX total (com capital de giro)</span><span class="fv">R$ 5,5 – 6,3 Mi</span></div>
+    <div class="fr"><span class="fl">Faturamento mensal em plena capacidade</span><span class="fv pos">R$ 2.180.000</span></div>
+    <div class="fr"><span class="fl">EBITDA mensal estimado</span><span class="fv pos">R$ 380.000 – 420.000</span></div>
+    <div class="fr"><span class="fl">TIR estimada</span><span class="fv pos">45–55% a.a.</span></div>
+    <div class="fr"><span class="fl">Payback do investimento</span><span class="fv">13 – 18 meses</span></div>
+    <div class="fr"><span class="fl">Equipe necessária</span><span class="fv">22 pessoas (14 operacional + 8 comercial/adm)</span></div>
+    <div class="fr"><span class="fl">Prazo para início de operação</span><span class="fv">6 meses (obras + montagem + licenças)</span></div>
+    <div class="fr total"><span class="fl" style="color:var(--white);font-weight:800;font-size:1rem">Veredicto</span><span class="fv big">✅ Negócio Altamente Viável</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════ FOOTER ══════════════════ -->
+<div class="footer">
+  <strong>Estudo de Viabilidade — Planta de Extração de Óleo de Caroço de Algodão · Bahia 2025</strong><br>
+  Documento de análise estratégica para fins de avaliação de investimento.
+</div>
+
+<script>
+function show(id, btn){
+  document.querySelectorAll('.s').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top: document.querySelector('.nv').offsetTop - 2, behavior:'smooth'});
+}
+</script>
+</body>
+</html>
